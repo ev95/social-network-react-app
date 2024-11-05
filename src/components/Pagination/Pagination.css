@@ -1,0 +1,25 @@
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin: 20px 10px;
+  align-items: center;
+}
+.pagination .page,
+.controls {
+  padding: 7px 10px;
+  background-color: #fff;
+  border-radius: 3px;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #847e7e;
+}
+.pagination .controls svg {
+  font-size: 24px;
+}
+
+.page.active {
+  background-color: #4483e8;
+  color: #fff;
+}
