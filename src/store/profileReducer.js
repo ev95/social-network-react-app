@@ -2,6 +2,8 @@ import { API } from "../api/api";
 
 // Action types
 const GET_USER = "GET_USER";
+const FOLLOW_USER = "FOLLOW_USER";
+const UNFOLLOW_USER = "UNFOLLOW_USER";
 
 // Initial State
 const initState = {
@@ -24,13 +26,30 @@ const profileReducer = (state = initState, action) => {
 
 // Action creators
 const getUserByIdAC = (user) => ({ type: GET_USER, payload: user });
+const followUserAC = (userId) => ({ type: FOLLOW_USER, payload: userId });
+const unfollowUserAC = (userId) => ({ type: UNFOLLOW_USER, payload: userId });
 
 // ThunkCreator
 export const getUsersByIdThunk = (id) => {
   return (dispatch) => {
     API.getUserById(id).then((res) => {
-      console.log(res.data);
       dispatch(getUserByIdAC(res.data));
+    });
+  };
+};
+
+export const followUserThunk = (id) => {
+  return () => {
+    API.followUser(id).then((res) => {
+      console.log(res.data);
+    });
+  };
+};
+
+export const unFollowUserThunk = (id) => {
+  return () => {
+    API.unfollowUser(id).then((res) => {
+      console.log(res.data);
     });
   };
 };

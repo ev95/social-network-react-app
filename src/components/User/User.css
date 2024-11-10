@@ -29,7 +29,42 @@
 }
 
 .user-id {
-  font-size: 0.875rem;
+  font-size: 0.675rem;
   color: #666;
   margin: 5px 0 0;
+}
+
+.follow,
+.unfollow {
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  padding: 6px 30px;
+  margin-top: 7px;
+  color: #fff;
+  background: rgb(3, 118, 255);
+  background: -moz-linear-gradient(
+    90deg,
+    rgba(3, 118, 255, 1) 0%,
+    rgba(50, 181, 254, 1) 69%,
+    rgba(0, 220, 241, 1) 100%
+  );
+  background: -webkit-linear-gradient(
+    90deg,
+    rgba(3, 118, 255, 1) 0%,
+    rgba(50, 181, 254, 1) 69%,
+    rgba(0, 220, 241, 1) 100%
+  );
+  background: linear-gradient(
+    90deg,
+    rgba(3, 118, 255, 1) 0%,
+    rgba(50, 181, 254, 1) 69%,
+    rgba(0, 220, 241, 1) 100%
+  );
+}
+
+.unfollow {
+  background: transparent;
+  color: rgb(34 159 254);
+  border: 1px solid rgb(34 159 254);
 }
