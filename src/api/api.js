@@ -8,4 +8,7 @@ export const API = {
   getUsers(page, count) {
     return axios_instance.get(`/users?page=${page}&count=${count}`);
   },
+  getUserById(userId) {
+    return axios_instance.get(`/profile/${userId}`);
+  },
 };

@@ -14,7 +14,7 @@ function Users() {
     }, [page])
 
     return (
-        <div>
+        <div className='container'>
             <div className='user-list'>
                 {users.map((user) => (
                     <User user={user} key={user.id} />
