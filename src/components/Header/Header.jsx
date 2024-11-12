@@ -1,15 +1,19 @@
-import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import siteLogo from '../../assets/images.png'
+import { FaUser } from "react-icons/fa";
+import { useEffect } from 'react';
 
+import { getMeThunk, LogoutUserThunk } from '../../store/profileReducer';
+import siteLogo from '../../assets/images.png'
 import './Header.css'
 
 function Header() {
-
-
+    const { isLoggedIn, userName } = useSelector((state) => state.profileState)
+    console.log(userName)
+    const dispatch = useDispatch()
     useEffect(() => {
-
-    }, []);
+        dispatch(getMeThunk())
+    }, [])
 
     return (
         <header>
@@ -41,7 +45,11 @@ function Header() {
                         </div>} */}
                 </div>
 
-                {/* <LightDarkSwitch /> */}
+                <div className='user-profile'>
+                    {isLoggedIn ?
+                        <><FaUser className='user-icon' /> {userName} / <button className='logout-btn' onClick={() => dispatch(LogoutUserThunk())}>Logout</button> </>
+                        : <NavLink to={'/login'} className="login-link">Login</NavLink>}
+                </div>
             </div>
         </header>
     )

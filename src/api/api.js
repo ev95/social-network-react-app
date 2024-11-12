@@ -23,4 +23,13 @@ export const API = {
   unfollowUser(userId) {
     return axios_instance.delete(`/follow/${userId}`);
   },
+  loginUser(email, password) {
+    return axios_instance.post("/auth/login", { email, password });
+  },
+  logoutUser() {
+    return axios_instance.delete("/auth/login");
+  },
+  getMe() {
+    return axios_instance.get("/auth/me");
+  },
 };
