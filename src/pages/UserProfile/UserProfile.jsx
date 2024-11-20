@@ -3,19 +3,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 
-import { getUsersByIdThunk } from '../../store/profileReducer';
 import './UserProfile.css'
+import { getUsersByIdThunk } from "../../store/slices/profileSlice";
 
 function UserProfile() {
     const { id } = useParams();
     const dispatch = useDispatch();
-    const { userProfile } = useSelector((state) => state.profileState);
+    const { userProfile } = useSelector((state) => state.profile);
 
     useEffect(() => {
         dispatch(getUsersByIdThunk(id))
     }, [id])
 
-    console.log(userProfile)
 
     return (
         <div className="profile-container">

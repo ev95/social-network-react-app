@@ -1,8 +1,9 @@
-import { NavLink } from 'react-router-dom'
-import './User.css'
-import { followUserThunk, unFollowUserThunk } from '../../store/profileReducer'
-import { useDispatch } from 'react-redux'
+import { NavLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { useState } from 'react';
+
+import { followUserThunk, unFollowUserThunk } from '../../store/slices/profileSlice';
+import './User.css'
 
 function User({ user }) {
     const dispatch = useDispatch();

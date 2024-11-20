@@ -3,8 +3,9 @@ import { useDispatch } from 'react-redux';
 import React from 'react';
 import * as Yup from 'yup';
 
-import { LoginUserThunk } from '../../store/profileReducer';
+
 import './LoginPage.css';
+import { LoginUserThunk } from '../../store/slices/profileSlice';
 
 const LoginPage = () => {
     const dispatch = useDispatch();
@@ -20,7 +21,7 @@ const LoginPage = () => {
     });
 
     const onSubmit = (values) => {
-        dispatch(LoginUserThunk(values.email, values.password))
+        dispatch(LoginUserThunk({ email: values.email, password: values.password }))
     };
 
     return (

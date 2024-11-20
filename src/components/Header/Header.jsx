@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { FaUser } from "react-icons/fa";
 import { useEffect } from 'react';
 
-import { getMeThunk, LogoutUserThunk } from '../../store/profileReducer';
+import { getMeThunk, LogoutUserThunk } from '../../store/slices/profileSlice';
 import siteLogo from '../../assets/images.png'
 import './Header.css'
 

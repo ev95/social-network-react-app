@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from "react";
-import { changePageAC } from '../../store/userReducer';
+// import { changePageAC } from '../../store/userReducer';
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 
 
@@ -33,11 +33,9 @@ function Pagination() {
 
     getPages(chunkIndex);
 
-
-
     return (
         <div className='pagination'>
-            {
+            {/* {
                 chunkIndex > 1 && <button className='controls' onClick={() => setChunkIndex(chunkIndex - 1)}> <IoIosArrowBack />
                 </button>
             }
@@ -49,7 +47,7 @@ function Pagination() {
                 chunkIndex * chunkCount >= maxPageCount ? "" : <button className='controls' onClick={() => setChunkIndex(chunkIndex + 1)}>
                     <IoIosArrowForward />
                 </button>
-            }
+            } */}
         </div>
     )
 }
