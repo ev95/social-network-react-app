@@ -4,8 +4,8 @@ import profileSlice from "./slices/profileSlice.js";
 
 const store = configureStore({
   reducer: {
-    users: usersSlice,
-    profile: profileSlice,
+    usersState: usersSlice,
+    profileState: profileSlice,
   },
 });
 
