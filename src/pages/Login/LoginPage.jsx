@@ -1,14 +1,15 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import React from 'react';
 import * as Yup from 'yup';
 
-
-import './LoginPage.css';
 import { LoginUserThunk } from '../../store/slices/profileSlice';
+import './LoginPage.css';
 
 const LoginPage = () => {
     const dispatch = useDispatch();
+    const { errorMessage } = useSelector((state) => state.profileState);
 
     const initialValues = {
         email: '',
@@ -39,6 +40,7 @@ const LoginPage = () => {
                         <Field type="password" id="password" name="password" />
                         <ErrorMessage name="password" component="div" className="error-message" />
                     </div>
+                    {errorMessage ? <span className='error-message'>{errorMessage}</span> : ''}
                     <button type="submit" className="login-btn follow">Login</button>
                 </Form>
             </Formik>

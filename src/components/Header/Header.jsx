@@ -9,7 +9,6 @@ import './Header.css'
 
 function Header() {
     const { isLoggedIn, userName } = useSelector((state) => state.profileState)
-    console.log(userName)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getMeThunk())

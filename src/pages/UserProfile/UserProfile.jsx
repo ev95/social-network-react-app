@@ -9,10 +9,10 @@ import { getUsersByIdThunk } from "../../store/slices/profileSlice";
 function UserProfile() {
     const { id } = useParams();
     const dispatch = useDispatch();
-    const { userProfile } = useSelector((state) => state.profile);
+    const { userProfile } = useSelector((state) => state.profileState);
 
     useEffect(() => {
-        dispatch(getUsersByIdThunk(id))
+        dispatch(getUsersByIdThunk(id));
     }, [id])
 
 
@@ -20,12 +20,12 @@ function UserProfile() {
         <div className="profile-container">
             <div className='img-wrapper'>
                 <img src={userProfile?.photos?.large ? userProfile?.photos?.small : 'https://media.istockphoto.com/id/1330180806/vector/blue-sign-design-for-photo-placeholder-on-app-design-user-interface-design-avatar-placeholder.jpg?s=612x612&w=0&k=20&c=jMgBjBh-shvWi0ojpkHSMFnTS9vLXFBKws_VLFhK2eo='} alt="User 1" className="user-image" />
-                <span className='curved-text'>{userProfile.lookingForAJob ? '#openToWork' : ''}</span>
+                <span className='curved-text'>{userProfile?.lookingForAJob ? '#openToWork' : ''}</span>
             </div>
 
             <div className='user-info'>
                 <h1>{userProfile?.fullName}</h1>
-                <i className='about-me'>{userProfile.aboutMe}</i>
+                <i className='about-me'>{userProfile?.aboutMe}</i>
                 <div className='socials'>
                     <h3>Follow me in</h3>
                     <div className="contact-links">

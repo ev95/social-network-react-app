@@ -3,45 +3,42 @@ import { API } from "../../api/api";
 
 export const getUsersByIdThunk = createAsyncThunk(
   "getUsersByIdThunk",
-  async (id) => {
-    const res = await API.getUserById(id);
-    return res.data;
+  async ({ id, navigation }) => {
+    return await API.getUserById(id);
   }
 );
 
 export const followUserThunk = createAsyncThunk(
   "followUserThunk",
   async (id) => {
-    const res = await API.followUser(id);
-
-    return res.data;
+    return await API.followUser(id);
   }
 );
 
 export const unFollowUserThunk = createAsyncThunk(
   "unFollowUserThunk",
   async (id) => {
-    const res = await API.unfollowUser(id);
-    return res.data;
+    return await API.unfollowUser(id);
   }
 );
 
 export const LoginUserThunk = createAsyncThunk(
   "LoginUserThunk",
-  async ({ email, password }) => {
-    const res = API.loginUser(email, password);
-    return res.data;
+  async ({ email, password }, { dispatch }) => {
+    return API.loginUser(email, password);
+    // .then(() => {
+    // dispatch(getMeThunk());
+    // navigate("/home");
+    // });
   }
 );
 
 export const getMeThunk = createAsyncThunk("getMeThunk", async () => {
-  const res = API.getMe();
-  return res.data;
+  return API.getMe();
 });
 
 export const LogoutUserThunk = createAsyncThunk("LogoutUserThunk", async () => {
-  const res = API.logoutUser();
-  return res.data;
+  return API.logoutUser();
 });
 
 const profileSlice = createSlice({
@@ -51,6 +48,7 @@ const profileSlice = createSlice({
     userId: null,
     isLoggedIn: false,
     userName: "",
+    errorMessage: "",
   },
   reducers: {
     setUserId(state, action) {
@@ -65,7 +63,7 @@ const profileSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getUsersByIdThunk.fulfilled, (state, action) => {
-      state.userProfile = action.payload;
+      state.userProfile = action.payload.data;
     });
     builder.addCase(followUserThunk.fulfilled, () => {
       console.log("User followed succdessfully");
@@ -74,17 +72,22 @@ const profileSlice = createSlice({
       console.log("User unfollowed succdessfully");
     });
     builder.addCase(LoginUserThunk.fulfilled, (state, action) => {
-      state.isLoggedIn = true;
-      state.userId = action.payload.userId;
-
+      if (!action.payload.data.data.userId) {
+        state.errorMessage = "Something went wrong, please try again";
+      } else {
+        state.isLoggedIn = true;
+        state.userId = action.payload.data.data.userId;
+        state.errorMessage = "";
+      }
+      // TODO redirect to home
       // dispatch(getMeThunk());
     });
     builder.addCase(getMeThunk.fulfilled, (state, action) => {
       state.isLoggedIn = true;
-      state.userName = action.payload.data.login;
-      state.userId = action.payload.data.id;
+      state.userName = action.payload.data.data.login;
+      state.userId = action.payload.data.data.id;
     });
-    builder.addCase(getMeThunk.rejected, (state, action) => {
+    builder.addCase(getMeThunk.rejected, (state) => {
       state.isLoggedIn = false;
       state.userName = "";
       state.userId = null;

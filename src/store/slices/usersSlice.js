@@ -13,8 +13,7 @@ import { API } from "../../api/api";
 export const getUsersThunk = createAsyncThunk(
   "getUsersThunk",
   async ({ page, usersPerPage }) => {
-    const res = API.getUsers(page, usersPerPage);
-    return res.data;
+    return API.getUsers(page, usersPerPage);
   }
 );
 
@@ -26,6 +25,7 @@ const usersSlice = createSlice({
     usersPerPage: 100,
     totalUsers: 26842,
     searchText: "",
+    loading: false,
   },
   reducers: {
     getUsers(state, action) {
@@ -40,8 +40,12 @@ const usersSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getUsersThunk.fulfilled, (state, action) => {
-      state.users = action.payload.items;
-      state.totalUsers = action.payload.totalCount;
+      state.loading = false;
+      state.users = action.payload.data.items;
+      state.totalUsers = action.payload.data.totalCount;
+    });
+    builder.addCase(getUsersThunk.pending, (state) => {
+      state.loading = true;
     });
   },
 });

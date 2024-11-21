@@ -8,7 +8,7 @@ import { getUsersThunk } from '../../store/slices/usersSlice';
 
 function Users() {
     const dispatch = useDispatch();
-    const { users, page, usersPerPage, totalUsers } = useSelector((state) => state.usersState)
+    const { users, page, usersPerPage, loading } = useSelector((state) => state.usersState)
 
     useEffect(() => {
         dispatch(getUsersThunk({ page, usersPerPage }))
@@ -16,11 +16,18 @@ function Users() {
 
     return (
         <div className='container'>
-            <div className='user-list'>
-                {users.map((user) => (
-                    <User user={user} key={user.id} />
-                ))}
-            </div>
+            {loading
+                ?
+                <div className='loading'><img src="https://www.icegif.com/wp-content/uploads/2023/07/icegif-1263.gif" alt="" /> </div>
+                :
+                <div className='user-list'>
+
+                    {users.map((user) => (
+                        <User user={user} key={user.id} />
+                    ))}
+                </div>
+            }
+
             {/* <Pagination /> */}
         </div>
 
